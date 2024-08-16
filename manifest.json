@@ -1,0 +1,66 @@
+{
+    "name": "LMS-Helper",
+    "description": "hallym-smartread 확장 프로그램",
+    "version": "1.0.0",
+    "author": "low",
+    "manifest_version": 3,
+    "background": {
+        "service_worker#이걸 통해 크롬 확장 백그라운드 기능": "background.js"
+    },
+    "icons": {
+        "128": "/#imge 넣어야 함"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "host_permissions": [
+        "http://*.ac.kr/mod/vod/viewer.php*",
+        "https://*.ac.kr/mod/vod/viewer.php*"
+    ],
+    "action": {
+        "default_popup": "#holding.html"
+    },
+    "options_page": "#holding.html",
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*.ac.kr/*",
+                "https://*.ac.kr/*"
+            ],
+            "js": [
+                "classplus.js"
+            ]
+        },
+        {
+            "matches": [
+                "http://*.ac.kr/mod/vod/viewer.php*",
+                "https://*.ac.kr/mod/vod/viewer.php*"
+            ],
+            "js": [
+                "videoHelper.js"
+            ]
+        },
+        {
+            "matches": [
+                "http://*.ac.kr/",
+                "https://*.ac.kr/"
+            ],
+            "js": [
+                "tableHelper.js"
+            ]
+        }
+    ],
+      "web_accessible_resources": [
+            {
+                "resources": [
+                    "js/video_us.js",
+                    "js/table_us.js",
+                    "css/table_us.css",
+                    "images/TR_GR.png"
+                ],
+                "matches": [
+                    "<all_urls>"
+                ]
+            }
+        ]
+    }
