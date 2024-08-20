@@ -5,10 +5,10 @@
     "author": "low",
     "manifest_version": 3,
     "background": {
-        "service_worker#이걸 통해 크롬 확장 백그라운드 기능": "background.js"
+        "service_worker": "background.js"
     },
     "icons": {
-        "128": "/#imge 넣어야 함"
+        "128": "images/Lo.png"
     },
     "permissions": [
         "storage"
@@ -18,9 +18,9 @@
         "https://*.ac.kr/mod/vod/viewer.php*"
     ],
     "action": {
-        "default_popup": "#holding.html"
+        "default_popup": "popup.html"
     },
-    "options_page": "#holding.html",
+    "options_page": "popup.html",
     "content_scripts": [
         {
             "matches": [
@@ -28,7 +28,7 @@
                 "https://*.ac.kr/*"
             ],
             "js": [
-                "classplus.js"
+                "Helper.js"
             ]
         },
         {
@@ -39,28 +39,17 @@
             "js": [
                 "videoHelper.js"
             ]
-        },
-        {
-            "matches": [
-                "http://*.ac.kr/",
-                "https://*.ac.kr/"
-            ],
-            "js": [
-                "tableHelper.js"
-            ]
         }
     ],
-      "web_accessible_resources": [
-            {
-                "resources": [
-                    "js/video_us.js",
-                    "js/table_us.js",
-                    "css/table_us.css",
-                    "images/TR_GR.png"
-                ],
-                "matches": [
-                    "<all_urls>"
-                ]
-            }
-        ]
-    }
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "js/video_us.js",
+                "images/Lo.png"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
+}
