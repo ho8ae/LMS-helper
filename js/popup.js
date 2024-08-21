@@ -1,28 +1,48 @@
 (() => {
-    let _data = {
-        video_us: true,
-    }
+    const _labels = ['video_us'];  // 사용할 요소의 ID 목록
 
-    const video_us = document.getElementById(video_us)
+    let _data = {
+        video_us: false,
+    };
+
+    const _disabled = {
+        video_us: false,
+    };
+
+    const _us = {};  // DOM 요소들을 저장할 객체
 
     function setData(data) {
-        chrome.storage.sync.set({ data })
+        chrome.storage.sync.set({ data });
     }
-    // setData 함수는 _data 객체를 Chrome의 storage.sync API에 저장합니다. 이 API를 사용하면 사용자의 설정이 여러 장치 간에 동기화될 수 있습니다.
 
     function getData() {
-        chrome.storage.sync.get("data", (data) => {
-            _data = data.data
-            video_us.checked = _data.video_us
-        })
+        chrome.storage.sync.get("data", (result) => {
+            if (result.data) {
+                _data = result.data;
+            }
+            Object.keys(_us).forEach(label => {
+                if (_us[label] && !_disabled[label]) {
+                    _us[label].checked = _data[label];
+                }
+            });
+        });
     }
 
-    video_us.onclick = (e) =>{
-        _data.video_us = e.target.checked
-        setData(_data)
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+        _labels.forEach(label => {
+            const element = document.getElementById(label);
+            if (element) {
+                _us[label] = element;
+                _us[label].disabled = _disabled[label];
+                _us[label].onclick = ({ target }) => {
+                    if (_disabled[label]) return;
+                    _data[label] = target.checked;
+                    setData(_data);
+                };
+            }
+        });
 
-    getData()
+        getData();  // 데이터를 가져와서 체크박스를 초기화
+    });
 
-
-})
+})();

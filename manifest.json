@@ -8,14 +8,10 @@
         "service_worker": "background.js"
     },
     "icons": {
-        "128": "images/Lo.png"
+        "128": "/images/Lo.png"
     },
     "permissions": [
         "storage"
-    ],
-    "host_permissions": [
-        "http://*.ac.kr/mod/vod/viewer.php*",
-        "https://*.ac.kr/mod/vod/viewer.php*"
     ],
     "action": {
         "default_popup": "popup.html"
@@ -28,7 +24,7 @@
                 "https://*.ac.kr/*"
             ],
             "js": [
-                "Helper.js"
+                "helper.js"
             ]
         },
         {
@@ -44,7 +40,8 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "js/video_us.js",
+                "js/v*.js",
+                "css/*.css",
                 "images/Lo.png"
             ],
             "matches": [
