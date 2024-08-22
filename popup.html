@@ -1,40 +1,52 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LMS-Helper</title>
     <link rel="stylesheet" href="css/popup.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
 </head>
-
 <body>
-    <div class="settings">
-        <div class="logo">
-            <img src="#" alt="로고 이미지 규격확인 필요">
-            <div class="logo-text">
-                <h1 class="logo-text-title">LMS-Helper</h1>
-                <span class="logo-text-small">by low</span>
+    <div class="popup-container">
+        <header class="header">
+            <div class="logo">
+                <img src="images/low_로고.jpg" alt="LMS-Helper 로고" class="logo-img">
+                <div class="logo-text">
+                    <h1 class="logo-title">LMS-Helper</h1>
+                    <span class="logo-subtitle">by low</span>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="item-title">다중 비디오 기능, 배속 기능</div>
-            <div>
-                <input id="video_us" type="checkbox" checked />
+        </header>
+        <main class="main-content">
+            <div class="settings-container">
+                <div class="setting-item">
+                    <span class="setting-title">다중 비디오 기능, 배속 기능</span>
+                    <label class="switch">
+                        <input type="checkbox" id="video_us" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-title">바로가기 버튼</span>
+                    <label class="switch">
+                        <input type="checkbox" id="short_us" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
-            <div class="item-title">출결 요약(공사중)</div>
-            <div>
-                <input id="table_us" type="checkbox" checked />
+        </main>
+        <footer class="footer">
+            <div class="social-links">
+                <a href="https://www.instagram.com/your_instagram" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://github.com/your_github" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
             </div>
-            <div class="item-title">바로가기 버튼</div>
-            <div>
-                <input id="short_us" type="checkbox" checked />
-            </div>
-
-        </div>
+        </footer>
     </div>
     <script src="js/popup.js"></script>
 </body>
-
 </html>

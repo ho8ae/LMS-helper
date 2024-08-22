@@ -1,6 +1,6 @@
 {
     "name": "LMS-Helper",
-    "description": "hallym-smartread 확장 프로그램",
+    "description": "코스모스 기능 확장 프로그램",
     "version": "0.2.1",
     "author": "low",
     "manifest_version": 3,
@@ -8,7 +8,7 @@
         "service_worker": "background.js"
     },
     "icons": {
-        "128": "/images/Lo.png"
+        "128": "/images/helper_logo.png"
     },
     "permissions": [
         "storage"
