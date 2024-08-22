@@ -71,6 +71,7 @@
         Object.defineProperty(window, 'sessionStorage', {
             value: createProxyStorage(sessionStorage)
         });
+        //session과 local Storage을 건드려  출석이 인정이 안되지 않을까?
     }
 
     function preventCheckerFunction() {
