@@ -1,7 +1,7 @@
 {
     "name": "LMS-Helper",
     "description": "hallym-smartread 확장 프로그램",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "author": "low",
     "manifest_version": 3,
     "background": {
@@ -42,14 +42,15 @@
                 "https://*.ac.kr/*"
             ],
             "js": [
-                "tableHelper.js"
+                "tableHelper.js",
+                "shortcutHelper.js"
             ]
         }
     ],
     "web_accessible_resources": [
         {
             "resources": [
-                "js/v*.js",
+                "js/*.js",
                 "css/*.css",
                 "images/Lo.png"
             ],

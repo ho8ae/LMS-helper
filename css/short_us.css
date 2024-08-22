@@ -1,0 +1,50 @@
+/* 바로가기 버튼 그룹 스타일 */
+.cp-short-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  /* 개별 바로가기 버튼 스타일 */
+  .cp-short-group .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .cp-short-group .btn-secondary {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: #495057;
+  }
+  
+  .cp-short-group .btn-secondary:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    color: #212529;
+  }
+  
+  /* 강의 박스 내부 여백 조정 */
+  .course-box {
+    padding-bottom: 15px;
+  }
+  
+  /* 강의 상태 영역 스타일 */
+  .course-status {
+    margin-top: 10px;
+  }
+  
+  /* 반응형 디자인을 위한 미디어 쿼리 */
+  @media (max-width: 768px) {
+    .cp-short-group {
+      flex-direction: column;
+    }
+    
+    .cp-short-group .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
