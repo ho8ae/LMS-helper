@@ -34,23 +34,63 @@
         document.head.appendChild(style);
     }
 
-    function closeSocket() {
-        if (window.socket) {
-            window.socket.close();
+    function blockWebSocket() {
+        window.WebSocket = function() {
+            console.log("WebSocket connection blocked");
+            return {
+                send: function() {},
+                close: function() {}
+            };
+        };
+    }
+
+    function manipulateStorage() {
+        function createProxyStorage(originalStorage) {
+            return new Proxy(originalStorage, {
+                set: function (target, key, value) {
+                    if (key === 'multipleVideoDetected' || key.includes('video') || key.includes('player')) {
+                        console.log('Prevented setting:', key);
+                        return true;
+                    }
+                    return Reflect.set(target, key, value);
+                },
+                get: function(target, key) {
+                    if (key === 'multipleVideoDetected' || key.includes('video') || key.includes('player')) {
+                        console.log('Prevented getting:', key);
+                        return null;
+                    }
+                    return Reflect.get(target, key);
+                }
+            });
         }
+
+        Object.defineProperty(window, 'localStorage', {
+            value: createProxyStorage(localStorage)
+        });
+
+        Object.defineProperty(window, 'sessionStorage', {
+            value: createProxyStorage(sessionStorage)
+        });
     }
 
     function preventCheckerFunction() {
         Object.defineProperty(window, 'remote_vod_pause', {
             writable: false,
-            value: closeSocket,
+            value: function() {
+                console.log('remote_vod_pause has been overridden.');
+            },
         });
-        closeSocket();
+
+        if (typeof learningCheckerV2 !== 'undefined') {
+            learningCheckerV2.remoteVodPause = function(socket) {
+                console.log("다중 비디오 감지 기능이 비활성화되었습니다.");
+            };
+        }
     }
 
     function insertElement() {
         const footer = document.getElementById('vod_footer');
-        console.log(footer); // footer 요소 확인
+        console.log(footer);
 
         if (!footer) {
             console.error("Element with ID 'vod_footer' not found.");
@@ -107,13 +147,14 @@
     }
 
     function removeSeekListener() {
-        // jwplayer 관련 기능을 제거하거나 유지할 필요가 없으므로 아무것도 하지 않음
         console.warn("jwplayer is not defined. Skipping removeSeekListener.");
     }
 
+    blockWebSocket();
+    manipulateStorage();
     insertStyle();
     insertElement();
     preventCheckerFunction();
     removeSeekListener();
-    console.log('Video Plugin Initialized!');
+    console.log('Video Plugin Initialized with WebSocket blocking and Storage manipulation!');
 })();
