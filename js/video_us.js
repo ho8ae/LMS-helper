@@ -1,4 +1,25 @@
 (() => {
+    // Mock jwplayer object
+    window.jwplayer = function(elementId) {
+        return {
+            on: function(event, callback) {
+                console.log(`Event listener added for: ${event}`);
+            },
+            off: function(event, callback) {
+                console.log(`Event listener removed for: ${event}`);
+            },
+            seek: function(time) {
+                console.log(`Seeking to: ${time}`);
+            },
+            getPosition: function() {
+                return 0;
+            },
+            getDuration: function() {
+                return 100;
+            }
+        };
+    };
+
     function insertStyle() {
         const style = document.createElement('style');
         style.textContent = `
@@ -71,8 +92,6 @@
         Object.defineProperty(window, 'sessionStorage', {
             value: createProxyStorage(sessionStorage)
         });
-        
-        
     }
 
     function preventCheckerFunction() {
@@ -92,8 +111,6 @@
 
     function insertElement() {
         const footer = document.getElementById('vod_footer');
-        console.log(footer);
-
         if (!footer) {
             console.error("Element with ID 'vod_footer' not found.");
             return;
@@ -149,9 +166,20 @@
     }
 
     function removeSeekListener() {
-        console.warn("jwplayer is not defined. Skipping removeSeekListener.");
+        if (typeof jwplayer === 'function') {
+            const player = jwplayer("player");
+            if (player && typeof player.off === 'function') {
+                player.off('seek');
+                console.log("Seek listener removed successfully.");
+            } else {
+                console.warn("Player or off method not found. Unable to remove seek listener.");
+            }
+        } else {
+            console.warn("jwplayer is not defined. Skipping removeSeekListener.");
+        }
     }
 
+    // Initialize everything
     blockWebSocket();
     manipulateStorage();
     insertStyle();
