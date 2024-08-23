@@ -11,8 +11,8 @@
         "128": "/images/helper_logo.png"
     },
     "permissions": [
-        "storage",
-        "activeTab"
+        "storage"
+        
     ],
     "host_permissions": [
         "http://*.ac.kr/*",
