@@ -54,4 +54,4 @@
     //     console.log('%cLMS-Helper! %cby LOW', 'color:#588044; font-size: 20px; padding: 10px; font-family:roboto', 'font-size: 12px; ')
     // }
     console.log('%cLMS-helper! %cby LOW', 'color:#669bbc; font-size: 20px; padding: 10px; font-family:roboto', 'font-size: 12px; ')
-})()
+})();
