@@ -1,7 +1,7 @@
 {
-    "name": "LMS-Helper",
+    "name": "LMS Helper",
     "description": "코스모스 기능 확장 프로그램",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "author": "low",
     "manifest_version": 3,
     "background": {
@@ -12,7 +12,6 @@
     },
     "permissions": [
         "storage"
-        
     ],
     "host_permissions": [
         "http://*.ac.kr/*",
