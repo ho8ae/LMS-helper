@@ -2,7 +2,6 @@ chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === "install") {
         const data = {
             video_us: false,
-            table_us: false,
             short_us: true,
         }
         chrome.storage.sync.set({ data });
