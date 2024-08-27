@@ -1,47 +1,74 @@
 (() => {
-  const _labels = ['video_us', 'short_us']
+  const _labels = ['video_us', 'short_us'];
   let _data = {
-
     video_us: false,
     short_us: true,
-
-
-  }
+  };
   const _disabled = {
-
     video_us: false,
     short_us: false,
-
-
-  }
-  const _us = {}
+  };
+  const _us = {};
 
   function setData(data) {
-    chrome.storage.sync.set({ data })
+    return new Promise((resolve, reject) => {
+      chrome.storage.sync.set({ data }, () => {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        } else {
+          resolve();
+        }
+      });
+    });
   }
 
   function getData() {
-    chrome.storage.sync.get("data", (data) => {
-      _data = data.data
-      Object.keys(_us).forEach(label => {
-        if (!_disabled[label]) {
-          _us[label].checked = _data[label]
+    return new Promise((resolve, reject) => {
+      chrome.storage.sync.get("data", (result) => {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        } else {
+          resolve(result.data);
         }
-      })
-    })
+      });
+    });
+  }
+
+  function updateUI() {
+    Object.keys(_us).forEach(label => {
+      if (!_disabled[label]) {
+        _us[label].checked = _data[label];
+      }
+    });
+  }
+
+  async function init() {
+    try {
+      const storedData = await getData();
+      if (storedData) {
+        _data = storedData;
+      }
+      updateUI();
+    } catch (error) {
+      console.error('Error initializing data:', error);
+    }
   }
 
   _labels.forEach(label => {
-    _us[label] = document.getElementById(label)
-    _us[label].disabled = _disabled[label]
-    _us[label].onclick = ({ target }) => {
-      if (_disabled[label]) return
-      _data[label] = target.checked
-      setData(_data)
-    }
-  })
+    _us[label] = document.getElementById(label);
+    _us[label].disabled = _disabled[label];
+    _us[label].addEventListener('change', async ({ target }) => {
+      if (_disabled[label]) return;
+      _data[label] = target.checked;
+      try {
+        await setData(_data);
+      } catch (error) {
+        console.error('Error saving data:', error);
+        // Revert the UI change if save failed
+        target.checked = !target.checked;
+      }
+    });
+  });
 
-  getData()
-})()
-
-//empty index 사용시 문제
+  init();
+})();

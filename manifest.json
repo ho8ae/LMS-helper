@@ -1,7 +1,7 @@
 {
     "name": "LMS Helper",
     "description": "코스모스 기능 확장 프로그램",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "low",
     "manifest_version": 3,
     "background": {
@@ -49,7 +49,7 @@
             "resources": [
                 "js/*.js",
                 "css/*.css",
-                "/images/low로고.jpg"
+                "/images/low_logo.jpg"
             ],
             "matches": [
                 "<all_urls>"
