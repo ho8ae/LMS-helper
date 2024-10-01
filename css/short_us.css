@@ -35,6 +35,8 @@
   /* 강의 상태 영역 스타일 */
   .course-status {
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
   }
   
   /* 반응형 디자인을 위한 미디어 쿼리 */

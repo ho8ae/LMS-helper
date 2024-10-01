@@ -1,0 +1,21 @@
+.cp-report-label {
+  font-size: 14px;
+  color: rgb(37, 45, 168);
+  margin: 5px 0 0 0;
+  padding: 0;
+  text-align: left;
+}
+
+.cp-report-label.accent {
+  color: #ea2f41;
+  font-weight: bold;
+}
+
+.course-status {
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-short-group {
+  margin-bottom: 5px;
+}

@@ -3,6 +3,7 @@ chrome.runtime.onInstalled.addListener((details) => {
         const data = {
             video_us: false,
             short_us: true,
+            repor_us: true,
         }
         chrome.storage.sync.set({ data });
     }
@@ -10,6 +11,6 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // 필요한 처리 로직만 남기고 콘솔 로그는 제거
-    sendResponse({status: "Message received in background"});
+    sendResponse({ status: "Message received in background" });
     return true;
 });
