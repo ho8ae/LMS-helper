@@ -6,7 +6,12 @@
   text-align: left;
 }
 
-.cp-report-label.accent {
+.cp-report-label .unsubmitted-assign {
+  color: #ea2f41;
+  font-weight: bold;
+}
+
+.cp-report-label .unattempted-quiz {
   color: #ea2f41;
   font-weight: bold;
 }

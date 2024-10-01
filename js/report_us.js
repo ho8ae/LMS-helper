@@ -57,11 +57,18 @@
         const p = document.createElement('p');
         p.id = elementId;
         p.className = 'cp-report-label';
-        p.innerHTML = `${assignText}${unsubmittedAssignments} | ${quizText}${unattemptedQuizzes}`;
-  
-        if (unsubmittedAssignments > 0 || unattemptedQuizzes > 0) {
-          p.classList.add('accent');
-        }
+        
+        const assignSpan = document.createElement('span');
+        assignSpan.className = unsubmittedAssignments > 0 ? 'unsubmitted-assign' : '';
+        assignSpan.textContent = `${assignText}${unsubmittedAssignments > 0 ? unsubmittedAssignments : '-'}`;
+        
+        const quizSpan = document.createElement('span');
+        quizSpan.className = unattemptedQuizzes > 0 ? 'unattempted-quiz' : '';
+        quizSpan.textContent = `${quizText}${unattemptedQuizzes > 0 ? unattemptedQuizzes : '-'}`;
+        
+        p.appendChild(assignSpan);
+        p.appendChild(document.createTextNode(' | '));
+        p.appendChild(quizSpan);
   
         const courseStatus = courseBox.querySelector('.course-status');
         if (courseStatus) {
