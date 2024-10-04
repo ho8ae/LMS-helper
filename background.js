@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener((details) => {
         const data = {
             video_us: false,
             short_us: true,
-            repor_us: true,
+            report_us: true,
         }
         chrome.storage.sync.set({ data });
     }
